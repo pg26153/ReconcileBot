@@ -4,7 +4,7 @@ CREATE TABLE reconciliation_failures (
     failure_message VARCHAR(255),
     failure_details TEXT,
     cycle_date DATE,
-    status VARCHAR(50) DEFAULT 'unresolved',
+    status VARCHAR(50) DEFAULT 'Unresolved',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     ticket VARCHAR(50)
 );
