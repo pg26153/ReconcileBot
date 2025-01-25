@@ -7,7 +7,7 @@ SELECT
     CONCAT(
         COUNT(*), ' Actor(s) missing in sub_actor table'
     ) AS failure_details,
-    CURRENT_DATE-1 AS cycle_date
+    CURRENT_DATE AS cycle_date
 FROM
     actor s
 LEFT JOIN
@@ -22,7 +22,7 @@ SELECT
     CONCAT(
         COUNT(*), ' Actor(s) with mismatched details between actor and sub_actor tables'
     ) AS failure_details,
-    CURRENT_DATE-1 AS cycle_date
+    CURRENT_DATE AS cycle_date
 FROM
     actor s
 Left JOIN
