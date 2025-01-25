@@ -26,7 +26,7 @@ FROM
 JOIN
     sub_actor t ON s.actor_id = t.actor_id
 WHERE
-    (s.first_name != t.first_name OR s.last_name != t.last_name)
+    (s.first_name != t.first_name OR s.last_name != t.last_name);
 
 
 -- Step 3: Mark unresolved failures as resolved if no discrepancies are found
