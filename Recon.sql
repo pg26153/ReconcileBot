@@ -23,7 +23,7 @@ SELECT
     CURRENT_DATE AS cycle_date
 FROM
     actor s
-JOIN
+Left JOIN
     sub_actor t ON s.actor_id = t.actor_id
 WHERE
     (s.first_name != t.first_name OR s.last_name != t.last_name);
