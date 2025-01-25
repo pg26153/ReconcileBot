@@ -3,7 +3,7 @@ INSERT INTO reconciliation_failures (failure_message, failure_details, cycle_dat
 SELECT
     'Mismatch in reconciliation - Source vs Target' AS failure_message,
     CONCAT(
-        COUNT(*), ' actor(s) missing in sub_actor table'
+        COUNT(*), ' Actor(s) missing in sub_actor table'
     ) AS failure_details,
     CURRENT_DATE AS cycle_date
 FROM
@@ -16,9 +16,9 @@ WHERE
 -- Validation 2: Data Validation - Mismatch in Actor Details Between actor and sub_actor
 INSERT INTO reconciliation_failures (failure_message, failure_details, cycle_date)
 SELECT
-    'Mismatch in sql - Data Validation' AS failure_message,
+    'Mismatch in reconciliation - Data Validation between source and target' AS failure_message,
     CONCAT(
-        COUNT(*), ' actor(s) with mismatched details between actor and sub_actor tables'
+        COUNT(*), ' Actor(s) with mismatched details between actor and sub_actor tables'
     ) AS failure_details,
     CURRENT_DATE AS cycle_date
 FROM
@@ -26,31 +26,30 @@ FROM
 JOIN
     sub_actor t ON s.actor_id = t.actor_id
 WHERE
-    (s.actor_name != t.actor_name OR s.actor_role != t.actor_role); -- Adjust column names based on actual schema
+    (s.first_name != t.first_name OR s.last_name != t.last_name)
 
 
 -- Step 3: Mark unresolved failures as resolved if no discrepancies are found
 
--- Step 1: Create a temporary table to store the previous cycle's failure messages and details
+-- Step 1: Create a temporary table to sfind out the ticket which needs to be set as resolved.
 CREATE TEMPORARY TABLE temp_failures AS
-SELECT failure_message, failure_details
-FROM reconciliation_failures
-WHERE cycle_date = (SELECT MAX(cycle_date) - 1 FROM reconciliation_failures);
+SELECT id,failure_message, failure_details
+FROM reconciliation_failures f1
+WHERE f1.cycle_date = CURRENT_DATE - INTERVAL 1 DAY
+  AND NOT EXISTS (
+      SELECT 1 
+      FROM reconciliation_failures f2
+      WHERE f2.cycle_date = CURRENT_DATE
+      AND f1.failure_message = f2.failure_message
+      AND f1.failure_details = f2.failure_details
+  );
 
 -- Step 2: Update the reconciliation_failures table
 UPDATE reconciliation_failures tgt
 JOIN temp_failures src
-ON src.failure_message = tgt.failure_message
-AND src.failure_details = tgt.failure_details
-SET tgt.status = 'resolved'
-WHERE NOT EXISTS (
-    SELECT 1 
-    FROM reconciliation_failures rf
-    WHERE rf.cycle_date = (SELECT MAX(cycle_date) FROM reconciliation_failures)
-    AND rf.failure_message = src.failure_message
-    AND rf.failure_details = src.failure_details
-);
+ON src.id=tgt.id
+SET tgt.status = 'Resolved';
+
 
 -- Step 3: Drop the temporary table after the update is complete
 DROP TEMPORARY TABLE IF EXISTS temp_failures;
-
