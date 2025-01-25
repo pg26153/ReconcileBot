@@ -17,10 +17,10 @@
 
 Before you begin, ensure you have the following:
 
-1. **Python 3.x**:
-2. **GitHub Personal Access Token**:
-3. **Jira API Token**:
-4. **MySQL Database**:
+1. **Python 3.x**
+2. **GitHub Personal Access Token**
+3. **Jira API Token**
+4. **MySQL Database**
 
 ## Installation
 
