@@ -1,3 +1,5 @@
+DELETE FROM reconciliation_failures WHERE cycle_date=CURRENT_DATE;
+
 -- Validation 1: Source vs Target - Missing Actors in sub_actor Table
 INSERT INTO reconciliation_failures (failure_message, failure_details, cycle_date)
 SELECT
