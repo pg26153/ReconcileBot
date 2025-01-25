@@ -26,7 +26,7 @@ DB_PASSWORD = 'YOUR_DATABASE_PASSWORD'
 DB_NAME = 'sakila'
 
 # Function to fetch SQL script from GitHub
-def get_sql_from_github(file_path="tes_folder/scripts/reconciliation.sql"):
+def get_sql_from_github(file_path="recon.sql"):
     search_url = f"{GITHUB_API_URL}/repos/{GITHUB_OWNER}/{GITHUB_REPO}/contents/{file_path}"
     response = requests.get(search_url, headers=HEADERS)
 
