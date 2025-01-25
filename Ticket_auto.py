@@ -85,7 +85,7 @@ def fetch_failure_details():
             cursor.execute("""
                 SELECT id, failure_message, failure_details, cycle_date
                 FROM reconciliation_failures
-                WHERE status = 'unresolved'
+                WHERE status = 'Unresolved'
                 AND cycle_date = CURRENT_DATE;
             """)
             result = cursor.fetchall()
@@ -154,7 +154,7 @@ def update_failure_ticket_details(id, ticket_key):
             cursor.execute("""
                 UPDATE reconciliation_failures
                 SET ticket=%s
-                WHERE status = 'unresolved'
+                WHERE status = 'Unresolved'
                 AND cycle_date = CURRENT_DATE
                 AND id=%s;
             """, (ticket_key, id))  # Use parameterized queries to avoid SQL injection
