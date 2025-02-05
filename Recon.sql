@@ -13,7 +13,8 @@ FROM
 LEFT JOIN
     sub_actor t ON s.actor_id = t.actor_id
 WHERE
-    t.actor_id IS NULL;
+    t.actor_id IS NULL
+HAVING COUNT(*)>1;
 
 -- Validation 2: Data Validation - Mismatch in Actor Details Between actor and sub_actor
 INSERT INTO reconciliation_failures (failure_message, failure_details, cycle_date)
@@ -28,7 +29,8 @@ FROM
 Left JOIN
     sub_actor t ON s.actor_id = t.actor_id
 WHERE
-    (s.first_name != t.first_name OR s.last_name != t.last_name OR t.actor_id IS NULL);
+    (s.first_name != t.first_name OR s.last_name != t.last_name OR t.actor_id IS NULL)
+HAVING COUNT(*)>1;
 
 
 -- Step 3: Mark unresolved failures as resolved if no discrepancies are found
