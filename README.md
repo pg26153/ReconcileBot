@@ -120,3 +120,5 @@ We welcome contributions from the community! Feel free to fork the repository, s
 - **Thorough Testing**: New features should be fully tested before submission.
 - **Documentation**: Any code changes should be accompanied by clear documentation.
 - **Clear Descriptions**: Provide a detailed explanation of the problem being solved and how your contribution addresses it.
+
+Together, we can make this tool even better! Happy coding! 🚀
