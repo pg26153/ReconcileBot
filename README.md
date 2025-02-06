@@ -12,6 +12,7 @@
 - Automatically create Jira tickets for each unresolved failure.
 - Attach the relevant SQL query to the Jira ticket as a comment.
 - Update the database with Jira ticket keys for tracking the status of failures.
+- Includes checks to prevent the creation of duplicate Jira tickets for the same failure.
 
 ## Prerequisites
 
@@ -83,6 +84,7 @@ python reconcilebot.py
 3. **Identify Unresolved Failures**:
    - The bot checks the `reconciliation_failures` table in the connected MySQL database to identify any unresolved reconciliation failures. 
    - The table contains records of failures that still need to be addressed, and the bot looks for entries marked as "unresolved" with the current date.
+   - The bot performs checks to ensure no duplicate tickets are created for the same failure by verifying if a similar ticket already exists in Jira.
 
 4. **Create Jira Tickets**:
    - For each unresolved failure found in the database, the bot creates a Jira ticket. The ticket is populated with the failure message, failure details, and cycle date.
@@ -95,5 +97,6 @@ python reconcilebot.py
 6. **Update Database**:
    - Once the Jira ticket is successfully created, the bot updates the `reconciliation_failures` table in the MySQL database by adding the Jira ticket key to the corresponding failure record.
    - This update marks the failure as linked to a Jira ticket, helping to track the resolution status and making it easier for teams to monitor and address the issue in the future.
+   - Also if a ticket is resolved, it is then updated in DB.
 
 By automating this workflow, **ReconcileBot** saves time, ensures proper tracking of failure issues, and helps teams manage reconciliation failures more efficiently.
