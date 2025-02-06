@@ -28,19 +28,33 @@ Before you begin, ensure you have the following:
 ## Installation
 
 1. **Clone the Repository**:
-   - Clone the repository to your local machine:
-     ```bash
-     git clone https://github.com/pg26153/reconcilebot.git
-     ```
 
-2. **Install Dependencies**:
-   - Install the required Python libraries listed in the `requirements.txt` file:
-     ```bash
-     pip install -r requirements.txt
-     ```
+Clone the repository to your local machine:
 
-3. **Configure the Application**:
-   - Update the configuration variables in the script (`reconcilebot.py`) with your GitHub, Jira, and MySQL details.
+git clone https://github.com/pg26153/reconcilebot.git
+
+2. **Create a Virtual Environment**
+
+```bash
+python -m venv venv
+```
+3. **Activate the Virtual Environment**
+
+Once the virtual environment is created, activate it:
+
+```bash
+.\venv\Scripts\activate
+```
+4. **Install Dependencies**:
+
+Install the required Python libraries listed in the `requirements.txt` file:
+```bash
+pip install -r requirements.txt
+```
+
+5. **Configure the Application**:
+
+Update the configuration variables in the script (`reconcilebot.py`) with your GitHub, Jira, and MySQL tokens.
 
 ## Configuration
 
@@ -63,9 +77,7 @@ Before running the script, update the following configuration values:
 - `DB_PASSWORD`: Your MySQL password.
 - `DB_NAME`: The name of the MySQL database (e.g., `sakila`).
 
-## Usage
-
-To run **ReconcileBot**, simply execute the Python script:
+6. To run **ReconcileBot**, simply execute the Python script:
 
 ```bash
 python reconcilebot.py
@@ -102,3 +114,11 @@ python reconcilebot.py
    - Also if a ticket is resolved, it is then updated in DB.
 
 By automating this workflow, **ReconcileBot** saves time, ensures proper tracking of failure issues, and helps teams manage reconciliation failures more efficiently.
+
+### 🤝 **Contribution**
+
+We welcome contributions from the community! Feel free to fork the repository, submit issues, or create pull requests. When contributing, please ensure:
+
+- **Thorough Testing**: New features should be fully tested before submission.
+- **Documentation**: Any code changes should be accompanied by clear documentation.
+- **Clear Descriptions**: Provide a detailed explanation of the problem being solved and how your contribution addresses it.
