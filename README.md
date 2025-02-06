@@ -1,5 +1,7 @@
 # ReconcileBot
 
+### Presentation : https://github.com/pg26153/ReconcileBot/blob/main/Presentation.pptx
+
 ## Overview
 
 **ReconcileBot** is an automated tool designed to handle reconciliation failures, execute SQL scripts, and generate Jira tickets for unresolved failures. The bot fetches reconciliation SQL queries from a GitHub repository, executes them on a MySQL database, identifies unresolved failures, and creates Jira tickets to track and resolve these issues. It also updates the database with the Jira ticket information and associates the SQL queries with the corresponding Jira tickets.
