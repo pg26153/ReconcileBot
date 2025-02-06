@@ -29,8 +29,6 @@ Before you begin, ensure you have the following:
 
 1. **Clone the Repository**:
 
-Clone the repository to your local machine:
-
 git clone https://github.com/pg26153/reconcilebot.git
 
 2. **Create a Virtual Environment**
